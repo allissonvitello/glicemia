@@ -1,0 +1,25 @@
+{
+  "_leia": "Pares de cor que o app usa de verdade (frente sobre fundo). tipo: 'texto' exige 4.5:1; 'grande' (>= 24px, ou >= 18.7px em negrito) e 'componente' (bordas de campos, ícones, foco, pontos do gráfico) exigem 3:1. Ao criar uma combinação nova no CSS, acrescente o par aqui.",
+  "pares": [
+    { "frente": "--texto", "fundo": "--fundo-cartao", "tipo": "texto", "onde": "texto principal nos cartões" },
+    { "frente": "--texto", "fundo": "--fundo", "tipo": "texto", "onde": "títulos sobre o fundo da página" },
+    { "frente": "--texto-suave", "fundo": "--fundo-cartao", "tipo": "texto", "onde": "rótulos, unidades, horários, ajuda" },
+    { "frente": "--texto-suave", "fundo": "--fundo", "tipo": "texto", "onde": "abas inativas, carregando" },
+    { "frente": "--primaria", "fundo": "--fundo-cartao", "tipo": "texto", "onde": "botões de texto (Cancelar, Esqueci minha senha)" },
+    { "frente": "--primaria", "fundo": "--fundo", "tipo": "texto", "onde": "botão Sair no topo" },
+    { "frente": "--primaria-texto", "fundo": "--primaria", "tipo": "texto", "onde": "botões principais, aba ativa, opção escolhida" },
+    { "frente": "--baixa", "fundo": "--fundo-cartao", "tipo": "texto", "onde": "valor e texto 'Baixa'" },
+    { "frente": "--meta", "fundo": "--fundo-cartao", "tipo": "texto", "onde": "valor e texto 'Na meta', aviso 'Metas salvas'" },
+    { "frente": "--alta", "fundo": "--fundo-cartao", "tipo": "texto", "onde": "valor e texto 'Alta'" },
+    { "frente": "--sobre-faixa", "fundo": "--baixa", "tipo": "texto", "onde": "selo 'Baixa'" },
+    { "frente": "--sobre-faixa", "fundo": "--meta", "tipo": "texto", "onde": "selo 'Na meta'" },
+    { "frente": "--sobre-faixa", "fundo": "--alta", "tipo": "texto", "onde": "selo 'Alta'" },
+    { "frente": "--perigo", "fundo": "--fundo-cartao", "tipo": "texto", "onde": "mensagens de erro, botão Apagar" },
+    { "frente": "--perigo", "fundo": "--fundo", "tipo": "texto", "onde": "erro de conexão sobre o fundo" },
+    { "frente": "--borda-campo", "fundo": "--fundo-cartao", "tipo": "componente", "onde": "borda de campos e opções do formulário" },
+    { "frente": "--primaria", "fundo": "--fundo-cartao", "tipo": "componente", "onde": "contorno de foco" },
+    { "frente": "--baixa", "fundo": "--fundo-cartao", "tipo": "componente", "onde": "pontos e barra 'Baixa' nos gráficos" },
+    { "frente": "--meta", "fundo": "--fundo-cartao", "tipo": "componente", "onde": "pontos e barra 'Na meta' nos gráficos" },
+    { "frente": "--alta", "fundo": "--fundo-cartao", "tipo": "componente", "onde": "pontos e barra 'Alta' nos gráficos" }
+  ]
+}

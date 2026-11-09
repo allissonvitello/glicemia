@@ -1,0 +1,581 @@
+:root {
+  --fundo: #f4f6f6;
+  --fundo-cartao: #ffffff;
+  --texto: #1c2626;
+  --texto-suave: #5e6b6b;
+  --linha: #dde3e3; /* só decorativa: divisórias e contorno de cartões */
+  --borda-campo: #768383; /* campos e opções: >= 3:1 sobre o cartão */
+  --primaria: #0f766e;
+  --primaria-texto: #ffffff;
+  --baixa: #d62f2f;
+  --meta: #157a45;
+  --alta: #946500;
+  --sobre-faixa: #ffffff; /* texto do selo sobre as cores de faixa */
+  --perigo: #c62828;
+
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--texto);
+  background: var(--fundo);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #111716;
+    --fundo-cartao: #1b2322;
+    --texto: #e7eeed;
+    --texto-suave: #9aa8a7;
+    --linha: #2c3736;
+    --borda-campo: #728281;
+    --primaria: #2bb3a3;
+    --primaria-texto: #062320;
+    --baixa: #f26464;
+    --meta: #43c17a;
+    --alta: #e5b02e;
+    --sobre-faixa: #111716;
+    --perigo: #f26464;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Texto de exemplo dos campos com o mesmo contraste do texto suave. */
+::placeholder {
+  color: var(--texto-suave);
+  opacity: 1;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+.pagina,
+.formulario {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 16px calc(96px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0 4px;
+  gap: 8px;
+}
+
+.topo h1 {
+  font-size: 1.25rem;
+}
+
+.topo-espaco {
+  width: 72px;
+}
+
+.rotulo {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+  color: var(--texto-suave);
+  margin-bottom: 8px;
+  padding: 0;
+}
+
+.unidade {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--texto-suave);
+}
+
+.cartao {
+  background: var(--fundo-cartao);
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.vazio {
+  color: var(--texto-suave);
+}
+
+/* Cores por faixa */
+.faixa-baixa {
+  --cor-faixa: var(--baixa);
+}
+.faixa-meta {
+  --cor-faixa: var(--meta);
+}
+.faixa-alta {
+  --cor-faixa: var(--alta);
+}
+
+/* Início */
+.ultima {
+  box-shadow: inset 6px 0 0 var(--cor-faixa, var(--linha));
+  padding-left: 22px;
+}
+
+.ultima-valor {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--cor-faixa, var(--texto));
+}
+
+.ultima-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  color: var(--texto-suave);
+}
+
+.selo {
+  background: var(--cor-faixa);
+  color: var(--sobre-faixa);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.resumo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.resumo-valor {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.grafico {
+  margin-bottom: 8px;
+}
+
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lista li + li {
+  border-top: 1px solid var(--linha);
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  background: none;
+  border: 0;
+  text-align: left;
+}
+
+.item-hora {
+  font-variant-numeric: tabular-nums;
+  color: var(--texto-suave);
+  min-width: 3.2em;
+}
+
+.item-corpo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.item-obs {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item-valor {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--cor-faixa, var(--texto-suave));
+}
+
+.botao-flutuante {
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(528px, calc(100% - 32px));
+  padding: 16px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--primaria);
+  color: var(--primaria-texto);
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.18);
+}
+
+/* Formulário */
+.campo-glicemia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px;
+  background: var(--fundo-cartao);
+  border: 2px solid var(--cor-faixa, var(--borda-campo));
+  border-radius: 14px;
+  transition: border-color 0.15s;
+}
+
+/* O número não tem contorno próprio; o cartão inteiro mostra o foco. */
+.campo-glicemia:focus-within {
+  outline: 2px solid var(--primaria);
+  outline-offset: 2px;
+}
+
+.glicemia-entrada {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.glicemia-entrada input {
+  width: 4ch;
+  border: 0;
+  background: none;
+  text-align: center;
+  font-size: clamp(2.5rem, 15vw, 3.5rem);
+  font-weight: 700;
+  color: var(--cor-faixa, var(--texto));
+  outline: none;
+}
+
+.faixa-texto {
+  font-weight: 600;
+  color: var(--cor-faixa, var(--texto-suave));
+  min-height: 1.3em;
+}
+
+.grupo {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.grupo.cartao {
+  padding: 16px;
+  border: 1px solid var(--linha);
+}
+
+.grupo.cartao legend {
+  float: left;
+  width: 100%;
+}
+
+.opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.opcao {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--borda-campo);
+  border-radius: 999px;
+  background: var(--fundo-cartao);
+}
+
+.opcao.ativa {
+  background: var(--primaria);
+  border-color: var(--primaria);
+  color: var(--primaria-texto);
+  font-weight: 600;
+}
+
+.entrada {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px;
+  border: 1px solid var(--borda-campo);
+  border-radius: 10px;
+  background: var(--fundo-cartao);
+  font-size: 1rem;
+}
+
+.entrada:focus,
+.opcao:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--primaria);
+  outline-offset: 2px;
+}
+
+.entrada-com-unidade {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.entrada-com-unidade .entrada {
+  max-width: 120px;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.adicionar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.botao-secundario {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px dashed var(--texto-suave);
+  border-radius: 10px;
+  background: none;
+  color: var(--texto);
+}
+
+.botao-texto {
+  min-height: 44px;
+  background: none;
+  border: 0;
+  padding: 8px 0;
+  color: var(--primaria);
+  font-weight: 600;
+}
+
+.botao-texto.remover {
+  align-self: flex-start;
+  color: var(--texto-suave);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.erro {
+  color: var(--perigo);
+  font-weight: 600;
+}
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.botao-principal {
+  padding: 16px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--primaria);
+  color: var(--primaria-texto);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.botao-principal:disabled {
+  opacity: 0.6;
+}
+
+.botao-perigo {
+  padding: 14px;
+  border: 1px solid var(--perigo);
+  border-radius: 14px;
+  background: none;
+  color: var(--perigo);
+  font-weight: 600;
+}
+
+/* Navegação entre seções */
+.abas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  background: var(--fundo-cartao);
+  border: 1px solid var(--linha);
+  border-radius: 12px;
+}
+
+.aba {
+  flex: 1 1 auto;
+  min-height: 44px;
+  padding: 10px 8px;
+  border: 0;
+  border-radius: 9px;
+  background: none;
+  color: var(--texto-suave);
+  font-weight: 600;
+}
+
+.aba.ativa {
+  background: var(--primaria);
+  color: var(--primaria-texto);
+}
+
+/* Histórico */
+.periodos .opcao {
+  flex: 1;
+}
+
+.barra-faixas {
+  display: flex;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--linha);
+}
+
+.barra-faixas span {
+  flex-basis: 0;
+  background: var(--cor-faixa);
+}
+
+.legenda-faixas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+.legenda-faixas li::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--cor-faixa);
+}
+
+.legenda-faixas strong {
+  color: var(--texto);
+}
+
+.dica {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 10px;
+  background: var(--fundo-cartao);
+  border: 1px solid var(--linha);
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+/* Ajustes */
+.grupo-config {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.grupo-config .rotulo {
+  margin-bottom: 0;
+}
+
+.ajuda {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}
+
+.metas-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.aviso {
+  color: var(--meta);
+  font-weight: 600;
+}
+
+/* Login e carregamento */
+.carregando {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  text-align: center;
+  color: var(--texto-suave);
+}
+
+.login {
+  padding-top: max(40px, env(safe-area-inset-top));
+}
+
+.login-topo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.login-topo h1 {
+  font-size: 1.6rem;
+}
+
+/* Modo pais */
+.faixa-leitura {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--fundo-cartao);
+  border: 1px solid var(--linha);
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+.erro .botao-texto {
+  padding: 0;
+}
+
+/* Botões de texto curtos ("Sair", "Cancelar") com área de toque de 44px. */
+.topo .botao-texto {
+  min-width: 44px;
+  padding: 8px 4px;
+}

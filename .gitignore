@@ -1,0 +1,19 @@
+# Arquivos gerados (recriados a cada build/instalação)
+node_modules/
+dist/
+dist-ssr/
+*.log
+
+# Configurações locais desta máquina e segredos
+.env.local
+*.local
+.claude/settings.local.json
+
+# Sistema e editores
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Cache do Python (scripts da skill)
+__pycache__/
