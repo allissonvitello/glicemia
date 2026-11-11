@@ -93,7 +93,7 @@ python3 .claude/skills/acessibilidade/scripts/auditar.py
 
 ## Como foi feito
 
-O projeto foi construído por uma pessoa sem experiência em programação, em parceria com o [Claude Code](https://claude.com/claude-code). As decisões de produto vieram de uma entrevista registrada no `PROJETO.md`. O desenvolvimento seguiu quatro etapas, cada uma testada antes da próxima:
+O projeto foi construído em parceria com o [Claude Code](https://claude.com/claude-code), baseando-se em um curso da Alura. As decisões de produto vieram de uma entrevista registrada no `PROJETO.md`. O desenvolvimento seguiu quatro etapas, cada uma testada antes da próxima:
 1. o dia a dia no app;
 2. o banco com as regras de acesso;
 3. o login e o modo acompanhante;
